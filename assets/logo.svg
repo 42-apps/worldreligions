@@ -1,0 +1,45 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="34%" r="82%">
+      <stop offset="0%" stop-color="#16335a"/>
+      <stop offset="100%" stop-color="#04070f"/>
+    </radialGradient>
+    <clipPath id="core"><circle cx="128" cy="104" r="46"/></clipPath>
+    <radialGradient id="sheen" cx="36%" cy="30%" r="72%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shade" cx="66%" cy="72%" r="74%">
+      <stop offset="52%" stop-color="#02030a" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#02030a" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+
+  <!-- rays shining DOWN: a spectrum fan from the sun -->
+  <g>
+    <g transform="rotate(-52 128 104)"><polygon points="128,236 119,150 137,150" fill="#D14B8F"/></g>
+    <g transform="rotate(-35 128 104)"><polygon points="128,236 119,150 137,150" fill="#7B4FA3"/></g>
+    <g transform="rotate(-18 128 104)"><polygon points="128,236 119,150 137,150" fill="#2F6FE0"/></g>
+    <g transform="rotate(0 128 104)">  <polygon points="128,236 119,150 137,150" fill="#2FA84F"/></g>
+    <g transform="rotate(18 128 104)"> <polygon points="128,236 119,150 137,150" fill="#F2A93B"/></g>
+    <g transform="rotate(35 128 104)"> <polygon points="128,236 119,150 137,150" fill="#E0561F"/></g>
+    <g transform="rotate(52 128 104)"> <polygon points="128,236 119,150 137,150" fill="#C0392B"/></g>
+  </g>
+
+  <!-- sun core: the faith-colour palette -->
+  <g clip-path="url(#core)">
+    <rect x="82"  y="56" width="13" height="96" fill="#7B4FA3"/>
+    <rect x="95"  y="56" width="13" height="96" fill="#2F6FE0"/>
+    <rect x="108" y="56" width="13" height="96" fill="#2FA84F"/>
+    <rect x="121" y="56" width="13" height="96" fill="#F2A93B"/>
+    <rect x="134" y="56" width="13" height="96" fill="#E0561F"/>
+    <rect x="147" y="56" width="13" height="96" fill="#C0392B"/>
+    <rect x="160" y="56" width="14" height="96" fill="#5E8BA0"/>
+    <circle cx="128" cy="104" r="46" fill="url(#shade)"/>
+    <circle cx="128" cy="104" r="46" fill="url(#sheen)"/>
+  </g>
+  <circle cx="128" cy="104" r="46" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
+</svg>
