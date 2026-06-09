@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>World Religions Explorer — Faiths of the World Over Time</title>
-<meta name="description" content="A Chrome extension that maps every country's religions and how they changed from antiquity to 2100, on an interactive 3D globe or flat map. Private, offline, collects no data.">
+<meta name="description" content="Map every country's religions and how they changed from antiquity to 2100, on an interactive 3D globe or flat map. A free web app — nothing to install — and a Chrome extension. Private, offline, collects no data.">
+<meta property="og:title" content="World Religions Explorer">
+<meta property="og:description" content="See how the world's faiths spread and changed over 5,000 years — on an interactive 3D globe. Free, runs in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://42-apps.github.io/worldreligions/">
 <link rel="icon" href="assets/icon.png">
 <style>
   :root { color-scheme: dark; }
@@ -33,6 +37,12 @@
     box-shadow: 0 6px 24px rgba(47,111,224,.35);
   }
   .cta-soon { background: rgba(255,255,255,.06); box-shadow: none; color: #cfe0f7; cursor: default; }
+  .cta:hover { text-decoration: none; filter: brightness(1.06); }
+  .cta.ghost { background: rgba(255,255,255,.06); box-shadow: none; color: #eaf1fb; border: 1px solid rgba(255,255,255,.18); }
+  .cta.ghost:hover { background: rgba(255,255,255,.1); filter: none; }
+  .brand-wrap { display: flex; align-items: center; gap: 12px; }
+  .topnav a { margin-left: 18px; color: #9cc5ff; text-decoration: none; font-size: 14px; }
+  .topnav a:hover { text-decoration: underline; }
   .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 8px; align-items: center; }
   .note { color: #8aa0bd; font-size: 14px; margin: 14px 0 0; }
   .hero { width: 100%; border-radius: 16px; margin: 36px 0 8px; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 20px 60px rgba(0,0,0,.5); display: block; }
@@ -54,19 +64,25 @@
 <div class="wrap">
   <p style="margin:0 0 18px"><a href="/" style="color:#7da7d9;text-decoration:none;font-size:13px;font-weight:600">&larr; 42&middot;apps</a></p>
   <header class="top">
-    <img class="logo" src="assets/logo.svg" alt="">
-    <span class="brandname">World Religions Explorer</span>
+    <div class="brand-wrap">
+      <img class="logo" src="assets/logo.svg" alt="">
+      <span class="brandname">World Religions Explorer</span>
+    </div>
+    <nav class="topnav">
+      <a href="app/worldreligions.html">Live map</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
   </header>
 
-  <p class="eyebrow">Chrome Extension</p>
+  <p class="eyebrow">Free web app &amp; Chrome extension</p>
   <h1>Every faith, every country — across 5,000 years</h1>
   <p class="lede">Watch the religious landscape of the world change from antiquity to a projection for 2100, on a beautiful interactive 3D globe or flat map. 173 countries, each coloured by its faiths, with a deep time slider you can drag — or press play.</p>
 
   <div class="ctas">
-    <!-- TODO: replace with the real Chrome Web Store listing URL once published -->
-    <span class="cta cta-soon">Coming soon to the Chrome Web Store</span>
+    <a class="cta" href="app/worldreligions.html">Open the live map &rarr;</a>
+    <a class="cta ghost" href="https://chromewebstore.google.com/detail/world-religions-explorer/inckleebbdffajpgppeompeobgdeloak" target="_blank" rel="noopener">Add to Chrome — it's free</a>
   </div>
-  <p class="note">Private by default · collects no data · makes no network requests · works fully offline</p>
+  <p class="note">Runs right in your browser — nothing to install · or add the Chrome extension · private by default, collects no data, works offline</p>
 
   <img class="hero" src="assets/globe.png" alt="A 3D globe coloured by each country's majority religion, with a world breakdown panel">
 
