@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Religions Explorer</title>
+<link rel="stylesheet" href="worldreligions.css?v=24">
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header id="topbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <defs>
+          <clipPath id="cg"><circle cx="16" cy="13" r="5.75"/></clipPath>
+          <radialGradient id="lgSheen" cx="36%" cy="30%" r="72%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".5"/><stop offset="45%" stop-color="#fff" stop-opacity=".1"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="lgShade" cx="66%" cy="72%" r="74%">
+            <stop offset="52%" stop-color="#02030a" stop-opacity="0"/><stop offset="100%" stop-color="#02030a" stop-opacity=".5"/>
+          </radialGradient>
+        </defs>
+        <g>
+          <g transform="rotate(-52 16 13)"><polygon points="16,29.5 14.9,18.7 17.1,18.7" fill="#D14B8F"/></g>
+          <g transform="rotate(-35 16 13)"><polygon points="16,29.5 14.9,18.7 17.1,18.7" fill="#7B4FA3"/></g>
+          <g transform="rotate(-18 16 13)"><polygon points="16,29.5 14.9,18.7 17.1,18.7" fill="#2F6FE0"/></g>
+          <g transform="rotate(0 16 13)"><polygon points="16,29.5 14.9,18.7 17.1,18.7" fill="#2FA84F"/></g>
+          <g transform="rotate(18 16 13)"><polygon points="16,29.5 14.9,18.7 17.1,18.7" fill="#F2A93B"/></g>
+          <g transform="rotate(35 16 13)"><polygon points="16,29.5 14.9,18.7 17.1,18.7" fill="#E0561F"/></g>
+          <g transform="rotate(52 16 13)"><polygon points="16,29.5 14.9,18.7 17.1,18.7" fill="#C0392B"/></g>
+        </g>
+        <g clip-path="url(#cg)">
+          <rect x="10.25"  y="7" width="1.7" height="12" fill="#7B4FA3"/>
+          <rect x="11.875" y="7" width="1.7" height="12" fill="#2F6FE0"/>
+          <rect x="13.5"   y="7" width="1.7" height="12" fill="#2FA84F"/>
+          <rect x="15.125" y="7" width="1.7" height="12" fill="#F2A93B"/>
+          <rect x="16.75"  y="7" width="1.7" height="12" fill="#E0561F"/>
+          <rect x="18.375" y="7" width="1.7" height="12" fill="#C0392B"/>
+          <rect x="20"     y="7" width="1.75" height="12" fill="#5E8BA0"/>
+          <circle cx="16" cy="13" r="5.75" fill="url(#lgShade)"/>
+          <circle cx="16" cy="13" r="5.75" fill="url(#lgSheen)"/>
+        </g>
+        <circle cx="16" cy="13" r="5.75" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"/>
+      </svg>
+      <div class="brand-txt">
+        <span class="brand-name">World Religions Explorer</span>
+        <span class="brand-sub">Exploring the development of religion over time and space</span>
+      </div>
+    </div>
+    <div class="tools">
+      <div id="searchWrap">
+        <input id="search" type="text" placeholder="Search a country…" autocomplete="off" spellcheck="false" aria-label="Search a country">
+        <div id="searchResults" class="hidden"></div>
+      </div>
+      <button id="menuBtn" title="Menu" aria-label="Menu">☰</button>
+      <div id="menu" class="hidden">
+        <a class="mi" href="/" title="Back to 42-apps home"><span class="mi-ic">🏠</span><span class="mi-tx">42&middot;apps home</span></a>
+        <button class="mi" id="miView"><span class="mi-ic">🗺</span><span class="mi-tx">Flat map</span></button>
+        <button class="mi" id="miShare"><span class="mi-ic">🔗</span><span class="mi-tx">Share this view</span></button>
+        <div class="mi-sep"></div>
+        <button class="mi mi-globe" id="miFill"><span class="mi-ic">◧</span><span class="mi-tx">Fill: Shade</span></button>
+        <button class="mi mi-globe" id="miSpin"><span class="mi-ic">⟳</span><span class="mi-tx">Auto-rotate</span><span class="mi-state">On</span></button>
+        <button class="mi" id="miReset"><span class="mi-ic">⤢</span><span class="mi-tx">Reset view</span></button>
+        <button class="mi" id="miFull"><span class="mi-ic">⛶</span><span class="mi-tx">Fullscreen</span></button>
+        <div class="mi-sep"></div>
+        <button class="mi" id="miTrend"><span class="mi-ic">📈</span><span class="mi-tx">World trend chart</span></button>
+        <button class="mi" id="miHelp"><span class="mi-ic">?</span><span class="mi-tx">How to use</span></button>
+        <button class="mi" id="miAbout"><span class="mi-ic">ℹ</span><span class="mi-tx">About &amp; sources</span></button>
+      </div>
+    </div>
+  </header>
+
+  <div id="focusBanner" class="hidden"></div>
+
+  <!-- ===== Globe ===== -->
+  <div id="globeViz"></div>
+  <svg id="flatViz" class="hidden" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div id="tooltip" class="hidden"></div>
+  <div id="toast" class="hidden"></div>
+
+  <!-- ===== World breakdown + faith key (click a row to highlight that faith) ===== -->
+  <div id="legendBox">
+    <div class="gb-title">World &middot; <span id="gbYear">2026 · today</span></div>
+    <div class="gb-bar" id="gbBar"></div>
+    <div id="gbRows"></div>
+    <div class="gb-note">Click a faith to highlight it &middot; % of world adherents (approx.)</div>
+  </div>
+
+  <!-- ===== Detail card ===== -->
+  <div id="detailCard" class="hidden">
+    <button id="detailClose" title="Close">×</button>
+    <div class="detail-head"><span id="detailFlag" class="detail-flag">🏳️</span>
+      <div><div id="detailName" class="detail-name">—</div>
+      <div class="detail-era-line">in <span id="detailEra">2020</span></div></div>
+    </div>
+    <div id="detailBreakdown"></div>
+    <div class="detail-trend-label">Over time — click to jump</div>
+    <div id="detailTrend"></div>
+    <div id="detailNote" class="detail-note"></div>
+  </div>
+
+  <!-- world breakdown is merged into #legendBox (left panel) -->
+
+
+  <!-- ===== Time slider ===== -->
+  <div id="timebar">
+    <div class="era-readout">
+      <span id="eraLabel" class="era-label">2020</span>
+      <span id="eraBadge" class="era-badge">recorded</span>
+    </div>
+    <div class="slider-row">
+      <button id="prevEra" class="step" title="Back one period (←)">‹</button>
+      <button id="nextEra" class="step" title="Forward one period (→)">›</button>
+      <input id="timeSlider" type="range" min="0" max="39" value="36" step="1" aria-label="Time">
+      <button id="playRevBtn" class="play" title="Play backward in time">◀</button>
+      <button id="playBtn" class="play" title="Play forward in time">▶</button>
+      <button id="nowBtn" class="nowbtn" title="Jump to today">today</button>
+    </div>
+    <div class="time-ends"><span>3000 BC</span><span class="era-key"><b style="color:#a6905f">antiquity</b> · <b style="color:#7196ab">history</b> · <b style="color:#6fb3ff">recorded</b> · <b style="color:#b888d8">projection</b></span><span>2100</span></div>
+  </div>
+
+  <!-- ===== About / disclaimer ===== -->
+  <div id="aboutOverlay" class="hidden">
+    <div class="about-box">
+      <button id="aboutClose" class="about-close" title="Close">×</button>
+      <h2>World Religions Explorer</h2>
+      <p>A living map of the world's faiths. Each country is coloured by its
+      <b>majority religion</b>; hover for the full proportional mix. Drag the
+      slider — or hit play — to watch the religious landscape change from
+      <b>antiquity to today</b>, with projections to <b>2100</b>.</p>
+      <p class="about-cav"><b>Please read:</b> figures are <b>approximate and
+      illustrative</b>. Modern data (1945–2020) draws on Pew Research and the
+      World Religion Project; deep-history figures are best-effort scholarly
+      estimates. The map uses <b>modern borders at all eras</b> as a
+      visualization device — ancient peoples and empires, not today's nations,
+      occupied that land. Composition counts <b>resident populations</b>
+      (including expatriates), as Pew does.</p>
+      <p class="about-src">Sources: Pew Research Center · World Religion Project
+      (Maoz &amp; Henderson, ARDA) · Our World in Data · historical scholarship.
+      Borders: Natural Earth. Globe: globe.gl.</p>
+    </div>
+  </div>
+
+  <!-- ===== First-run tutorial ===== -->
+  <div id="tutorial" class="hidden">
+    <div class="tut-box">
+      <img class="tut-logo" src="icons/logo.svg" alt="" width="66" height="66">
+      <h2>Welcome to World Religions Explorer</h2>
+      <p class="tut-lead">See how the world's faiths have spread and changed — from antiquity to a projection for 2100.</p>
+      <div class="tut-steps">
+        <div class="tut-step"><span class="tut-ic">🕓</span><div><b>Travel through time.</b> Drag the slider or press play; the map updates live. Hit <b>Today</b> to jump back to now.</div></div>
+        <div class="tut-step"><span class="tut-ic">🗺️</span><div><b>Click any country</b> for its full religious breakdown and a trend chart across history.</div></div>
+        <div class="tut-step"><span class="tut-ic">🎨</span><div><b>The left panel</b> is the world breakdown — click a faith to highlight where it's strongest.</div></div>
+        <div class="tut-step"><span class="tut-ic">🌐</span><div><b>Globe or flat map.</b> Switch in the ☰ menu (top-right). The flat map fills each country proportionally.</div></div>
+      </div>
+      <p class="tut-cav">Figures are approximate &amp; illustrative; modern borders are shown at every era as a visual device. See <b>About</b> (in the menu) for sources.</p>
+      <button id="tutStart" class="tut-btn">Start exploring →</button>
+    </div>
+  </div>
+
+  <!-- ===== Flat-map first-time tip ===== -->
+  <div id="flatTip" class="hidden">
+    <div class="tut-box">
+      <h2>🗺️ The flat map</h2>
+      <p class="tut-lead">Every country is filled <b>proportionally by faith</b> — so you see each nation's whole religious mix at a glance, not just its majority.</p>
+      <div class="tut-steps">
+        <div class="tut-step"><span class="tut-ic">📊</span><div><b>Proportional fill.</b> Each country fills from the bottom up by share. A nation that's 70% Christian &amp; 30% Muslim shows the bottom 70% purple, the top 30% green — the taller a colour, the bigger that faith.</div></div>
+        <div class="tut-step"><span class="tut-ic">🔍</span><div><b>Zoom &amp; pan.</b> Scroll to zoom in (small countries become readable) and drag to move around. Recentre via ☰ → <b>Reset view</b>.</div></div>
+        <div class="tut-step"><span class="tut-ic">👆</span><div><b>Hover</b> any country for its exact percentages; <b>click</b> for the full breakdown and a trend chart over time.</div></div>
+        <div class="tut-step"><span class="tut-ic">🎨</span><div><b>Highlight a faith</b> — click one in the left panel to shade the whole map by that religion's share. <b>Globe view</b> is in the ☰ menu.</div></div>
+      </div>
+      <p class="tut-cav">This is a flat (equirectangular) projection, so areas near the poles look stretched (Greenland, Antarctica), and a couple of countries that cross the date line (Russia, Fiji) can smear sideways.</p>
+      <button id="ftStart" class="tut-btn">Got it</button>
+    </div>
+  </div>
+
+  <!-- ===== World trend chart ===== -->
+  <div id="worldTrend" class="hidden">
+    <div class="wt-box">
+      <button id="wtClose" class="about-close" title="Close">×</button>
+      <h2>World religions over time</h2>
+      <p class="wt-sub">Population-weighted share of world adherents, antiquity → 2100. Click the chart to jump to that era.</p>
+      <div id="wtChart"></div>
+      <div id="wtLegend" class="wt-legend"></div>
+      <p class="wt-cav">Deep-history figures weight present-day populations and are illustrative; modern data draws on Pew Research &amp; the World Religion Project. 2030–2100 are projections.</p>
+    </div>
+  </div>
+
+  <script src="lib/globe.gl.min.js"></script>
+  <script src="lib/polygon-clipping.js"></script>
+  <script src="data/religions.js?v=16"></script>
+  <script src="data/religion-data.js?v=16"></script>
+  <script src="worldreligions.js?v=25"></script>
+</body>
+</html>
